@@ -105,36 +105,22 @@ int dxActor::getActorId()
 }
 
 void dxActor::addActorId()
- {
+{
 	actorIDVec.push_back(actorId());
 }
 int dxActor::actorId()
 {
 	srand( time(NULL));
 
-	globalNextIdCheck = rand() % 1000;
+	globalNextIdCheck = rand() % 1000 + rand();//Generate the actor id
 	actorID = globalNextIdCheck;//Needed to avoid last out duplications
 
 	actorID = rand() % 1000 + rand();
-
 	//Do a quick check to see if we have a clash, and, if we do: change it.
-	if(actorID == globalPrevIdCheck) actorID = rand() % 1000;
+	if(actorID == globalPrevIdCheck) actorID = rand() % 1000 + 60;
 	//Assign current id into previous variable.
 	globalPrevIdCheck = actorID;//to ensure no first in duplications.
-	globalNextIdCheck = rand() % 1000;//To ensure there is not an existing duplication when we come into the function again.
-
-	//Check against all actorIDs in the vector and fix duplication issues
-	if(actorIDVec.size() != 0)
-	{
-		for(int i = 0; i <= actorIDVec.size() - 1; i++)
-		{
-			if(actorIDVec[i] == actorID)
-				actorID = rand() % 1000;
-		}
-	}
-	//Due to fast execution of method, check if we are not already in the current actorID to prevent duplications
-	//if(actorID != actorID)
-		//actorIDVec.push_back(actorID);
+	globalNextIdCheck = rand() % 1000 + rand();//To ensure there is not an existing duplication when we come into the function again.
 
 	return actorID;
 }

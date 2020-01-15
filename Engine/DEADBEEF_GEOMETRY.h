@@ -1,5 +1,6 @@
 #include "dxActor.h"
 #include "dxSprite.h"
+#include "Continents.h"
 class DEADBEEF_Geometry
 {
 private:
@@ -10,10 +11,14 @@ public:
 	static std::vector<dxActor*>  sceneryModels;
 	static std::vector<Isprite*> m_IspriteVec;
 	static std::vector<Iactor*>  m_IcopyActorVec;
+	static std::vector<continents*> m_ContinentVec;
 
 	static float lightPosX;
 	static float lightPosY;
 	static float lightPosZ;
+
+	static float m_continentHealth[5];
+	static float m_continentResearch[5];
 
 	static bool bumpEnabled;
 
@@ -41,6 +46,17 @@ public:
 	static void instanceCopyActor(int actorNum, int copyAcorNum);
 	static void renderActorSpecific(int actorNum);
 	static void renderCopyActorSpecific(int copyActorNum);
+
+	static void createSceneryMesh(int numOfMeshes);
+	static void initialiseSceneryData(int sceneryNum, std::string modelLocation, LPCSTR textureLocation, LPCSTR bumpLocation, LPCSTR specularLocation);
+	static void initialiseSceneryRotLoc(int sceneryNum,float rotX, float rotY, float rotZ, float posX, float posY, float posZ);
+	static void drawScenery(int sceneryNum, float rotX, float rotY, float rotZ, float posX, float posY, float posZ);
+	static void renderspecificScenery(int sceneryNum);
+
+	void loadAllSceneries();
+	void updateAllSceneries();
+	void renderAllSceneries();
+	void destroyAllSceneries();
 
 
 	//Class methods for sprite control
@@ -78,6 +94,10 @@ std::vector<dxActor*>  DEADBEEF_Geometry::m_IactorVec;
 std::vector<Isprite*> DEADBEEF_Geometry::m_IspriteVec;
 std::vector<dxActor*> DEADBEEF_Geometry::sceneryModels;
 std::vector<Iactor*> DEADBEEF_Geometry::m_IcopyActorVec;
+std::vector<continents*> DEADBEEF_Geometry::m_ContinentVec;
+
+ float DEADBEEF_Geometry::m_continentHealth[];
+ float DEADBEEF_Geometry::m_continentResearch[];
 
 
 int DEADBEEF_Geometry::copyActorCounter;
@@ -89,6 +109,11 @@ float DEADBEEF_Geometry::lightPosZ;
 
 DEADBEEF_Geometry::DEADBEEF_Geometry()
 {
+	m_continentHealth[0] = 500;
+	m_continentHealth[1] = 500;
+	m_continentHealth[2] = 500;
+	m_continentHealth[3] = 500;
+	m_continentHealth[4] = 500;
 	bumpEnabled = true;
 }
 
@@ -97,6 +122,36 @@ DEADBEEF_Geometry::~DEADBEEF_Geometry(){}
 void DEADBEEF_Geometry::renderActorSpecific(int actorNum)
 {
 	m_IactorVec[actorNum]->draw();
+}
+
+void DEADBEEF_Geometry::renderspecificScenery(int sceneryNum)
+{
+	sceneryModels[sceneryNum]->draw();
+}
+
+void DEADBEEF_Geometry::createContinent(int numOfContinents)
+{
+	for(int i = 0; i < numOfContinents; i++)
+	{
+		continents* newContinent;
+		m_ContinentVec.push_back(newContinent = new continents);
+	}
+}
+
+void DEADBEEF_Geometry::updateAllContinents()
+{
+
+	m_ContinentVec[0]->updateContinentData(m_continentHealth[0], m_continentResearch[0]);
+	m_ContinentVec[1]->updateContinentData(m_continentHealth[1], m_continentResearch[1]);
+	m_ContinentVec[2]->updateContinentData(m_continentHealth[2], m_continentResearch[2]);
+	m_ContinentVec[3]->updateContinentData(m_continentHealth[3], m_continentResearch[3]);
+	m_ContinentVec[4]->updateContinentData(m_continentHealth[4], m_continentResearch[4]);
+}
+
+void DEADBEEF_Geometry::initialiseContinentData(int continentNum, float continentHealth, float continentProgression)
+{
+	m_ContinentVec[continentNum]->continentHealth = continentHealth;
+	m_ContinentVec[continentNum]->continentResearch = continentHealth;
 }
 
 void DEADBEEF_Geometry::renderCopyActorSpecific(int copyActorNum)
@@ -153,10 +208,34 @@ void DEADBEEF_Geometry::initialiseActorData(int actorNum, std::string modelLocat
 	m_IactorVec[actorNum]->specularLocation = specLocation;
 }
 
+void DEADBEEF_Geometry::initialiseSceneryData(int sceneryNum, std::string modelLocation, LPCSTR textureLocation, LPCSTR bumpLocation, LPCSTR specLocation)
+{
+	sceneryModels[sceneryNum]->addActorId();
+
+	sceneryModels[sceneryNum]->modelLocation	 = modelLocation;
+	sceneryModels[sceneryNum]->textureLocation = textureLocation;
+	sceneryModels[sceneryNum]->bumpLocation    = bumpLocation;
+	sceneryModels[sceneryNum]->specularLocation = specLocation;
+}
+
+
+
 void DEADBEEF_Geometry::initialiseActorRotLoc(int actorNum,float rotX, float rotY, float rotZ, float posX, float posY, float posZ)
 {
 	m_IactorVec[actorNum]->setActorRotation(rotX, rotY, rotZ);
 	m_IactorVec[actorNum]->setActorPosition(posX, posY, posZ);
+}
+
+void DEADBEEF_Geometry::initialiseSceneryRotLoc(int sceneryNum,float rotX, float rotY, float rotZ, float posX, float posY, float posZ)
+{
+	sceneryModels[sceneryNum]->setActorRotation(rotX, rotY, rotZ);
+	sceneryModels[sceneryNum]->setActorPosition(posX, posY, posZ);
+}
+
+void DEADBEEF_Geometry::drawScenery(int sceneryNum, float rotX, float rotY, float rotZ, float posX, float posY, float posZ)
+{
+	sceneryModels[sceneryNum]->setActorRotation(rotX, rotY, rotZ);
+	sceneryModels[sceneryNum]->setActorPosition(posX, posY, posZ);
 }
 
 void DEADBEEF_Geometry::drawActor(int actorNum, float rotX, float rotY, float rotZ, float posX, float posY, float posZ)
@@ -262,6 +341,23 @@ void DEADBEEF_Geometry::createActors(int numOfActors)
 	}
 }
 
+void DEADBEEF_Geometry::createSceneryMesh(int numOfMeshes)
+{
+	for(int i = 0; i < numOfMeshes; i++)
+	{
+		dxActor* myMesh;
+		sceneryModels.push_back(myMesh = new dxActor);
+	}
+}
+
+void DEADBEEF_Geometry::loadAllSceneries()
+{
+	for (unsigned int i = 0; i < sceneryModels.size(); i++)
+	{
+		sceneryModels[i]->load();
+	}
+
+}
 
 void DEADBEEF_Geometry::loadAllActors()
 {
@@ -276,6 +372,15 @@ void DEADBEEF_Geometry::loadAllActors()
 	}
 }
 
+void DEADBEEF_Geometry::renderAllSceneries()
+{
+	for (unsigned int i = 0; i < sceneryModels.size(); i++)
+	{
+		sceneryModels[i]->draw();
+	}
+
+
+}
 
 void DEADBEEF_Geometry::renderAllActors()
 {
@@ -290,6 +395,14 @@ void DEADBEEF_Geometry::renderAllActors()
 	}
 }
 
+void DEADBEEF_Geometry::updateAllSceneries()
+{
+	for (unsigned int i = 0; i < sceneryModels.size(); i++)
+	{
+		sceneryModels[i]->update();
+	}
+
+}
 
 void DEADBEEF_Geometry::updateAllActors()
 {
@@ -304,6 +417,14 @@ void DEADBEEF_Geometry::updateAllActors()
 	}
 }
 
+void DEADBEEF_Geometry::destroyAllSceneries()
+{
+	for (unsigned int i = 0; i < sceneryModels.size(); i++)
+	{
+		sceneryModels[i]->destroy();
+	}
+
+}
 
 void DEADBEEF_Geometry::destroyAllActors()
 {

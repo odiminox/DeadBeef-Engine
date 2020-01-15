@@ -56,7 +56,7 @@ public:
 	//Scene functions
 	void beginScene();
 	void endScene();
-	//float updateScene();
+	float updateScene();
 
 	void shaderLoader(LPCSTR shaderFileName, LPCSTR technqueName);
 	void fixedFunctionPipeline();
@@ -112,11 +112,11 @@ void DEADBEEF::beginScene()
 	dxBeginScene();
 	//Temp storage for these values, create a function to update each frame call.
 	// Set the yaw (Y axis), pitch (X axis), and roll (Z axis) rotations
-	//yaw    = Windows->m_inputYaw;
-	//roll     = Windows->m_inputRoll;
-	//pitch  = Windows->m_inputPitch;
+	yaw    = Windows->m_inputYaw;
+	roll     = Windows->m_inputRoll;
+	pitch  = Windows->m_inputPitch;
 
-	//delta = myTimer.lastElapsedFrame;
+	delta = myTimer.lastElapsedFrame;
 }
 void DEADBEEF::endScene()
 {
@@ -143,27 +143,27 @@ void DEADBEEF::shaderLoader(LPCSTR shaderFileName, LPCSTR techniqueName)
 	 myFont->renderFont(pD3DDevice, mytext, rectIn, red, blue, green, alpha);
  }
 
- //float DEADBEEF::updateScene()
- //{
-	// float fps = (float)m_iFrameCnt / myTimer.lastElapsedFrame;
-	// float mspf = 1000.0f / fps;
+ float DEADBEEF::updateScene()
+ {
+	 float fps = (float)m_iFrameCnt / myTimer.lastElapsedFrame;
+	 float mspf = 1000.0f / fps;
 
-	// std::ostringstream outs;
-	// outs.precision(5);
-	// outs
-	//	 << "\n\n\n\n\n\nFRAME STATS"
-	//	 << "\nanim rate: " << myTimer.anim_rate
-	//	 << "\nTime: " << myTimer.lastElapsedFrame
-	//	 << "\nframe Count: " << m_iFrameCnt
-	//	 << "\nmiliseconds per frame: " << mspf
-	//	 << "\nFPS: " << fps;
-	// m_sFrameStats = outs.str();
+	 std::ostringstream outs;
+	 outs.precision(5);
+	 outs
+		 << "\n\n\n\n\n\nFRAME STATS"
+		 << "\nanim rate: " << myTimer.anim_rate
+		 << "\nTime: " << myTimer.lastElapsedFrame
+		 << "\nframe Count: " << m_iFrameCnt
+		 << "\nmiliseconds per frame: " << mspf
+		 << "\nFPS: " << fps;
+	 m_sFrameStats = outs.str();
 
-	// m_iFrameCnt++;
+	 m_iFrameCnt++;
 
-	// m_fDeltaTime = 100.0f / fps;
+	 m_fDeltaTime = 100.0f / fps;
 
-	// return m_fDeltaTime;
- //}
+	 return m_fDeltaTime;
+ }
 
 #endif

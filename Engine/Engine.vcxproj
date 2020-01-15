@@ -28,7 +28,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v100</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -45,10 +45,9 @@
     <ExecutablePath>$(DXSDK_DIR)Utilities\bin\x86;$(ExecutablePath)</ExecutablePath>
     <IncludePath>Z:\Users\Si\Desktop\DX10\Engine 3.0.2 - Input_MenuStates\Engine\Lua5\Include;C:\Users\Si\Desktop\Lundum Dare 2\Engine\include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
     <LibraryPath>Z:\Users\Si\Desktop\DX10\Engine 3.0.2 - Input_MenuStates\Engine\Lua5\Lib;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(DXSDK_DIR)Utilities\bin\x86;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(DXSDK_DIR)Include;C:\Users\Si\Desktop\Lundum Dare 2\Engine\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
@@ -66,7 +65,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;d3d10.lib;d3dx10d.lib;irrKlang.lib;d3dx9d.lib;dxerr.lib;dxguid.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -88,6 +86,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="continents.cpp" />
     <ClCompile Include="dxFPSCamera.cpp" />
     <ClCompile Include="dxFontManager.cpp" />
     <ClCompile Include="dxGhostCamera.cpp" />
@@ -107,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classLoader.h" />
+    <ClInclude Include="Continents.h" />
     <ClInclude Include="DEADBEEF_CORE.h" />
     <ClInclude Include="DEADBEEF_ENGINE.h" />
     <ClInclude Include="DEADBEEF_GEOMETRY.h" />
@@ -143,6 +143,7 @@
     <ClInclude Include="IupdateSprite.h" />
     <ClInclude Include=".\input.h" />
     <ClInclude Include="meshImporter.h" />
+    <ClInclude Include="MySoundEventReciever.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
@@ -155,7 +156,6 @@
     <None Include="..\..\..\..\Desktop\werwer.png" />
     <None Include="bumpMap.fx" />
     <None Include="DiffuseSpecular.fx" />
-    <None Include="E:\Simon\Programming\DX10 2\Engine 3.1.5 - Shadows + collision\Engine\texturing.fx" />
     <None Include="fixedFunction.fx" />
     <None Include="lighthelper.fx" />
     <None Include="Textures\splash.png" />

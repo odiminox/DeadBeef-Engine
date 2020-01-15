@@ -8,7 +8,7 @@ bool dxGhostCamera::keyHeldD;
 void dxGhostCamera::renderGhostCamera(D3DXMATRIX &in_projectionMatrix, D3D10_VIEWPORT &in_viewPort, D3DXMATRIX &in_worldMatrix,
 																																						  D3DXMATRIX &in_viewMatrix)
 {
-//	float yaw, pitch, roll;
+	float yaw, pitch, roll;
 
 	D3DXMATRIX yawMatrix;
 	D3DXMATRIX pitchMatrix;

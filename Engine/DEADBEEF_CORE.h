@@ -62,7 +62,6 @@ public:
 
 	void enablePointLight(int lightNum);
 	void setPointLightPosCol(int lightNum, float X, float Y, float Z, float R, float G, float B, float A);
-	void updateAllLights();
 
 	void enableDebugMode();
 
@@ -124,13 +123,6 @@ void DEADBEEF_CORE::orthographicCamera()
 	orthoCamera(projectionMatrix, viewPort);
 }
 
-void DEADBEEF_CORE::updateAllLights()
-{
-	for (unsigned int i = 0; i < m_LightVec.size(); i++)
-	{
-		m_LightVec[i]->update();
-	}
-}
 void DEADBEEF_CORE::createLights(int numLights)
 {
 	for(int i = 0; i < numLights; i++)
@@ -139,14 +131,6 @@ void DEADBEEF_CORE::createLights(int numLights)
 		m_LightVec.push_back(DBLight = new dxlightManager);
 	}
 }
-//
-//void DEADBEEF_CORE::updateAllLights()
-//{
-//	for (unsigned int i = 0; i < m_LightVec.size(); i++)
-//	{
-//		m_LightVec[i]->update();
-//	}
-//}
 
 void DEADBEEF_CORE::setDirectionalLightPosCol(int lightNum, float X, float Y, float Z, float R, float G, float B, float A)
 {

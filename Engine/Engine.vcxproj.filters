@@ -195,6 +195,12 @@
     <ClInclude Include="dxCollision.h">
       <Filter>ENGINE\Core\Game Logic</Filter>
     </ClInclude>
+    <ClInclude Include="Continents.h">
+      <Filter>ENGINE\Core Modules\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MySoundEventReciever.h">
+      <Filter>ENGINE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dxSpriteManager.cpp">
@@ -245,6 +251,9 @@
     <ClCompile Include="dxFPSCamera.cpp">
       <Filter>ENGINE\Core Modules\Camera\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="continents.cpp">
+      <Filter>ENGINE\Core Modules\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Textures\splash.png">
@@ -266,9 +275,6 @@
       <Filter>ENGINE\Shaders</Filter>
     </None>
     <None Include="lighthelper.fx">
-      <Filter>ENGINE\Shaders</Filter>
-    </None>
-    <None Include="E:\Simon\Programming\DX10 2\Engine 3.1.5 - Shadows + collision\Engine\texturing.fx">
       <Filter>ENGINE\Shaders</Filter>
     </None>
   </ItemGroup>

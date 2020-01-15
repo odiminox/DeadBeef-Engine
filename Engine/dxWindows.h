@@ -128,7 +128,6 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
 
 	if(firstMouseLoad == false)
 	{
-		//These four values need to be seeded with a value that changes in accordance to the screen size.
 		myTestInput.dx = 600;
 		myTestInput.dy = 500;
 
@@ -252,15 +251,15 @@ bool windowsManager::InitWindow(HINSTANCE hInstance, int width, int height)
 	wcex.hCursor = LoadCursor(NULL, IDC_ARROW); // the default cursor to use
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW+1); // the background color
 	wcex.lpszMenuName = NULL; // the resource name for the menu
-	wcex.lpszClassName = TEXT("DEADBEEF ENGINE DEVELOPMENT BUILD V3.1.6"); // the class name being created
+	wcex.lpszClassName = TEXT("terravolve v1.1 - By Simon Jordan"); // the class name being created
 	wcex.hIconSm = 0; // the handle to the small icon
 	RegisterClassEx(&wcex);
 	// Resize the window
 	RECT rect = { 0, 0, width, height };
 	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
 	// create the window from the class above
-	wndHandle = CreateWindow(TEXT("DEADBEEF ENGINE DEVELOPMENT BUILD V3.1.6"),
-		TEXT("DEADBEEF ENGINE DEVELOPMENT BUILD V3.1.6"),
+	wndHandle = CreateWindow(TEXT("terravolve v1.1 - By Simon Jordan"),
+		TEXT("terravolve v1.1 - By Simon Jordan"),
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
