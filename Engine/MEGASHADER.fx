@@ -2,7 +2,7 @@
 //--------------------------------------------------------------------------------------
 // MEGASHADER.fx
 //
-//Simon  Jordan
+//Simon 'dxCUDA' Jordan
 //
 //This shader is highly radioactive, the geiger counter is off the charts.
 //I advise you to find one better.
@@ -25,7 +25,6 @@ Texture2D tex2D;
 Texture2D bump2D;
 //Specular map texture
 Texture2D spec2D;
-int setColour = 1;
 //--------------------------------------------------------------------------------------
 
 //TEXTURE SAMPLER STATE
@@ -157,6 +156,8 @@ PS_INPUT_PP_BLINNPHONG VS_PIXEL_LIGHTING_BLINNPHONG( VS_INPUT input )
 	output.t = input.t;
 
 	output.pW = mul( input.p, World );
+	//output.pW = mul( input.p, View );    
+	//output.pW = mul( output.p, Projection );	
 
 	//set position into clip space
 	output.p = mul( input.p, World );
@@ -168,7 +169,9 @@ PS_INPUT_PP_BLINNPHONG VS_PIXEL_LIGHTING_BLINNPHONG( VS_INPUT input )
 	//Calculate the normal vector against the world matrix only and then normalize it
 	output.n = normalize(mul(input.n, (float3x3)World));
 	
-
+	//Transform to homogeneous clip space
+	//output.p = mul(input.p, WVP);
+	
 	//Calculate the tangent vector against the world matrix only and then normalize the final value
 	output.tangent = mul(input.tangent, (float3x3)World);
     output.tangent = normalize(output.tangent);		
@@ -192,35 +195,138 @@ PS_INPUT_PP_BLINNPHONG VS_PIXEL_LIGHTING_BLINNPHONG( VS_INPUT input )
 
 float4 PS_PIXEL_LIGHTING_BLINNPHONG( PS_INPUT_PP_BLINNPHONG input ) : SV_Target
 {
-	float4 textureColor;
-	float4 color;
-	bool inValue;
-
-	textureColor	   = tex2D.Sample(linearSampler, input.t);
 	//////////////////////////
 		//renormalize interpolated vectors
 	input.n = normalize( input.n );		
 	input.h = normalize( input.h );
-
+	
 	//calculate lighting	
 	float4 I = calcBlinnPhongLighting( material, light.color, input.n, -light.dir, input.h );
-
-	if (setColour == 1){
-		color = float4(1.0f, 0.0f, 0.0f, 1.0f);
-		textureColor = textureColor + color;
-		return I * textureColor; 
-	}	
-	//color = color  * textureColor;
-
-	
-
-	
 	
 	//with texturing
 	return I * tex2D.Sample(linearSampler, input.t);
 }
 
 
+float4 PS_NORMAL_MAP( PS_INPUT_PP_BLINNPHONG input) : SV_Target
+{  
+	float4 textureColor;
+    float4 bumpMap;
+    float3 bumpNormal;
+	float3 bitangent;
+	float lightIntensity;
+    float4 color;
+	float4 specularIntensity;
+	float4 specularPower1;
+	float3 reflection;
+	float4 diffuse;
+	float4 specular;
+	float4 I;
+	float s;
+	float3 lightVec;
+
+	textureColor	   = tex2D.Sample(linearSampler, input.t);
+	//bumpMap			   = bump2D.Sample(linearSampler, input.t);
+	specularIntensity  = spec2D.Sample(linearSampler, input.t);
+
+	//renormalize interpolated vectors
+	input.h = normalize( input.h );
+
+	// Expand the range of the normal value from (0, +1) to (-1, +1).
+    bumpMap = (2.0f * bumpMap) - 1.0f;
+
+	input.n = normalize( input.n );		
+	input.tangent = normalize(input.tangent - dot(input.tangent, input.n)*input.n);//Gram-Schmidt orthogonalize
+	bitangent = cross(input.n, input.tangent);//this is where the issue arises
+
+	//Tex space matrix
+	float3x3 texSpace = float3x3(input.tangent, bitangent, input.n);
+
+	//Convert normal from normal map to texture space and store in input.normal
+	bumpNormal = normalize(mul(bumpMap, texSpace));
+
+	input.n = normalize(mul(bumpMap, texSpace));
+
+	if(pLightType == 0)
+	{
+		lightIntensity = saturate(dot(bumpNormal, -light.dir));
+		// Determine the final diffuse color based on the diffuse color and the amount of light intensity.
+		color = saturate(material.Kd * lightIntensity);
+		
+		color = color  * textureColor;
+
+		specularPower1 = 5.0f;//Need to make this modifiable outside of the shader
+		if(lightIntensity > 0.0f)
+		{
+			//Calculate the reflection vector based on the light intensity, normal vector and light direction
+			reflection = normalize(2 * lightIntensity * bumpNormal +light.dir);
+			// Determine the amount of specular light based on the reflection vector, viewing direction, and specular power.
+			specular = pow(saturate(dot(reflection, input.h)), specularPower1);
+			// Use the specular map to determine the intensity of specular light at this pixel.
+			 specular = specular * specularIntensity;
+			// Add the specular component last to the output color.
+			color = saturate(color + specular);
+
+		}
+		 //calculate lighting	
+		I = calcBlinnPhongLighting( material, light.color, input.n, -light.dir, input.h );
+
+
+	} else if (pLightType == 1)
+	{
+		lightIntensity = saturate(dot(bumpNormal, -pLight.dir));
+		// Determine the final diffuse color based on the diffuse color and the amount of light intensity.
+		color = saturate(material.Kd * lightIntensity);
+
+		// The vector from the surface to the light.
+		lightVec =normalize(pLight.pos - input.pW);
+		
+		// The distance from surface to light.
+		float d = length(lightVec);
+
+		
+		// Normalize the light vector.
+		lightVec /= d;
+		
+		if( d > pLight.range )
+		return float4(0.0f, 0.0f, 0.0f, 0.0f);
+
+		s = pow(max(dot(-lightVec, pLight.dir), 0.0f), pLight.spotPower);
+
+		//color = color *  s * textureColor;
+		//color = color  / dot(pLight.att, float3(1.0f, d, d*d));
+		color = color  * textureColor;
+
+		specularPower1 = 5.0f;//Need to make this modifiable outside of the shader
+		if(lightIntensity > 0.0f)
+		{		
+			//Calculate the reflection vector based on the light intensity, normal vector and light direction
+			reflection = normalize(2 * lightIntensity * bumpNormal +pLight.dir);
+			// Determine the amount of specular light based on the reflection vector, viewing direction, and specular power.
+			specular = pow(saturate(dot(reflection, -pLight.dir)), specularPower1);
+			 // Use the specular map to determine the intensity of specular light at this pixel.
+			specular = specular * specularIntensity;
+
+			
+			  // Add the specular component last to the output color.
+			color = saturate(color  + specular) * s;
+			color = color  / dot(pLight.att, float3(1.0f, d, d*d));
+
+		}
+		//color = color  / dot(pLight.att, float3(1.0f, d, d*d)) * s * textureColor;
+
+		//color = color * textureColor;
+		 //calculate lighting	
+		I = calcBlinnPhongLighting( material, pLight.color, input.n, -pLight.dir, input.h );
+     	
+		
+	}
+	
+	 
+	return I *   color;
+	//return I *  color;
+
+}
 //--------------------------------------------------------------------------------------
 // Techniques
 //--------------------------------------------------------------------------------------
