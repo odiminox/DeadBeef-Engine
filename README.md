@@ -9,3 +9,10 @@ Features:
 5. Preset camera modes: orbit, ghost, FPS
 6. Some LUA bindings
 7. Dodgy C++ code
+
+Example scenes:
+1. FPS horror game example
+![Imgur](https://i.imgur.com/zZMf0Jd.jpg)
+
+2. Terravolve Ludum Dare planet management game jam
+![Imgur](https://i.imgur.com/Dt2a7ko.jpg)
