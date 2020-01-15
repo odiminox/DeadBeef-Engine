@@ -1,0 +1,1 @@
+Actors.renderActor(0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);

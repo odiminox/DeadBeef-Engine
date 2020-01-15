@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ENGINE">
+      <UniqueIdentifier>{036e6269-ae4f-41d1-95aa-8cb18a554159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core">
+      <UniqueIdentifier>{5b503a17-87f1-439c-bf60-02674ee1564c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Interfaces">
+      <UniqueIdentifier>{acb62d54-820a-4896-bcc1-85bd7187728b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Application Entry">
+      <UniqueIdentifier>{fbcfaae5-1253-4ec5-8eef-f57ab08c94a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Graphics">
+      <UniqueIdentifier>{c1620a0d-d2f7-431d-b3db-9b220a9724c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Graphics\Graphics core">
+      <UniqueIdentifier>{ca57baa7-f264-42c2-a964-4bff281308d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Temp/bin">
+      <UniqueIdentifier>{9bb1b938-505f-4ecd-903c-195444d0d1ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Game Logic">
+      <UniqueIdentifier>{a089aea1-cdbe-43e2-bb74-544f14f47c2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Interfaces\Header Files">
+      <UniqueIdentifier>{f4ac382a-f852-4e64-b42d-b9c3fa24d13b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Interfaces\Source Files">
+      <UniqueIdentifier>{741e6e9e-9774-4ac4-80d1-0dfef6cdb5bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core Modules">
+      <UniqueIdentifier>{0d81aae2-40b3-4caf-8cae-b38434e8a094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core Modules\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="ENGINE\Core Modules\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ENGINE\Core\Interfaces\Header Files\Actor">
+      <UniqueIdentifier>{24b23f55-e6c8-4d4b-baaf-ab0007a44f6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Interfaces\Header Files\Sprite">
+      <UniqueIdentifier>{04a2e7a3-0617-4d44-bdba-2aa401a97a4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Interfaces\Header Files\Entity">
+      <UniqueIdentifier>{c33627d8-c941-4b7d-b491-81b13307a67a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Interfaces\Source Files\Actor">
+      <UniqueIdentifier>{7df47f65-f333-4cc7-884f-c4ece0913908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Interfaces\Source Files\Sprite">
+      <UniqueIdentifier>{04aa87de-f51c-4632-b5f0-96be4b5ab699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core\Interfaces\Source Files\Entity">
+      <UniqueIdentifier>{7eb1c70b-7b55-47e8-a3be-cfa972de909d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core Modules\Camera">
+      <UniqueIdentifier>{afd8019d-30a1-423b-bdc9-ce0fd5614f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core Modules\Camera\Heder Files">
+      <UniqueIdentifier>{e178e18d-4c4c-4ee0-a73b-81dee77c51fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Core Modules\Camera\Source Files">
+      <UniqueIdentifier>{9118278e-3e9b-41e6-a1f9-892e2709859f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ENGINE\Shaders">
+      <UniqueIdentifier>{1f62355d-ce43-4c45-92be-0cd7504d9ef0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dxSpriteManager.h">
+      <Filter>ENGINE\Core Modules\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dxWindows.h">
+      <Filter>ENGINE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="dxFontManager.h">
+      <Filter>ENGINE\Core Modules\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dxTextureLoader.h">
+      <Filter>ENGINE\Core Modules\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DX_Mesh_Loader.h">
+      <Filter>ENGINE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="dxSystem.h">
+      <Filter>ENGINE\Application Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="meshImporter.h">
+      <Filter>Temp/bin</Filter>
+    </ClInclude>
+    <ClInclude Include="dxD3D.h">
+      <Filter>ENGINE\Core\Graphics\Graphics core</Filter>
+    </ClInclude>
+    <ClInclude Include="dxGeometry.h">
+      <Filter>ENGINE\Core\Graphics\Graphics core</Filter>
+    </ClInclude>
+    <ClInclude Include="dxLightManager.h">
+      <Filter>ENGINE\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>ENGINE\Core\Game Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="gameTimer.h">
+      <Filter>Temp/bin</Filter>
+    </ClInclude>
+    <ClInclude Include="IclassManagerUpdater.h">
+      <Filter>ENGINE\Core\Interfaces\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IclassBaseManager.h">
+      <Filter>ENGINE\Core\Interfaces\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="classLoader.h">
+      <Filter>ENGINE\Core\Game Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="dxBaseModel.h">
+      <Filter>ENGINE\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="dxActor.h">
+      <Filter>ENGINE\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Iclass.h">
+      <Filter>ENGINE\Core\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="dxBaseSprite.h">
+      <Filter>ENGINE\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="dxSprite.h">
+      <Filter>ENGINE\Core\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DEADBEEF_ENGINE.h">
+      <Filter>ENGINE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DEADBEEF_GEOMETRY.h">
+      <Filter>ENGINE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="dxInput.h">
+      <Filter>ENGINE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="gameStateMan.h">
+      <Filter>ENGINE\Core\Game Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Iactor.h">
+      <Filter>ENGINE\Core\Interfaces\Header Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="IupdateActor.h">
+      <Filter>ENGINE\Core\Interfaces\Header Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Isprite.h">
+      <Filter>ENGINE\Core\Interfaces\Header Files\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="IupdateSprite.h">
+      <Filter>ENGINE\Core\Interfaces\Header Files\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="IupdateEntity.h">
+      <Filter>ENGINE\Core\Interfaces\Header Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Ientity.h">
+      <Filter>ENGINE\Core\Interfaces\Header Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>ENGINE\Core Modules\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dxShaderLoader.h">
+      <Filter>ENGINE\Core Modules\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dxCameraManager.h">
+      <Filter>ENGINE\Core Modules\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="dxOrbitCamera.h">
+      <Filter>ENGINE\Core Modules\Camera\Heder Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dxGhostCamera.h">
+      <Filter>ENGINE\Core Modules\Camera\Heder Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dxFPSCamera.h">
+      <Filter>ENGINE\Core Modules\Camera\Heder Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DEADBEEF_CORE.h">
+      <Filter>ENGINE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include=".\input.h">
+      <Filter>ENGINE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="dxCollision.h">
+      <Filter>ENGINE\Core\Game Logic</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dxSpriteManager.cpp">
+      <Filter>ENGINE\Core Modules\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dxFontManager.cpp">
+      <Filter>ENGINE\Core Modules\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dxTextureLoader.cpp">
+      <Filter>ENGINE\Core Modules\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ENGINE\Application Entry</Filter>
+    </ClCompile>
+    <ClCompile Include="IclassManagerUpdater.cpp">
+      <Filter>ENGINE\Core\Interfaces\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IclassBaseManager.cpp">
+      <Filter>ENGINE\Core\Interfaces\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Iactor.cpp">
+      <Filter>ENGINE\Core\Interfaces\Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="IupdateActor.cpp">
+      <Filter>ENGINE\Core\Interfaces\Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="IupdateSprite.cpp">
+      <Filter>ENGINE\Core\Interfaces\Source Files\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Isprite.cpp">
+      <Filter>ENGINE\Core\Interfaces\Source Files\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="IupdateEntity.cpp">
+      <Filter>ENGINE\Core\Interfaces\Source Files\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Ientity.cpp">
+      <Filter>ENGINE\Core\Interfaces\Source Files\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="dxShaderLoader.cpp">
+      <Filter>ENGINE\Core Modules\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dxOrbitCamera.cpp">
+      <Filter>ENGINE\Core Modules\Camera\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dxGhostCamera.cpp">
+      <Filter>ENGINE\Core Modules\Camera\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dxFPSCamera.cpp">
+      <Filter>ENGINE\Core Modules\Camera\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Textures\splash.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bumpMap.fx">
+      <Filter>Temp/bin</Filter>
+    </None>
+    <None Include="DiffuseSpecular.fx">
+      <Filter>Temp/bin</Filter>
+    </None>
+    <None Include="texturing.fx">
+      <Filter>Temp/bin</Filter>
+    </None>
+    <None Include="..\..\..\..\Desktop\werwer.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="fixedFunction.fx">
+      <Filter>ENGINE\Shaders</Filter>
+    </None>
+    <None Include="lighthelper.fx">
+      <Filter>ENGINE\Shaders</Filter>
+    </None>
+    <None Include="E:\Simon\Programming\DX10 2\Engine 3.1.5 - Shadows + collision\Engine\texturing.fx">
+      <Filter>ENGINE\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="MEGASHADER.fx">
+      <Filter>ENGINE\Shaders</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2B716E3A-2F43-4014-A30C-8735367C433B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Engine</RootNamespace>
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>$(DXSDK_DIR)Utilities\bin\x86;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>Z:\Users\Si\Desktop\DX10\Engine 3.0.2 - Input_MenuStates\Engine\Lua5\Include;C:\Users\Si\Desktop\Lundum Dare 2\Engine\include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath>Z:\Users\Si\Desktop\DX10\Engine 3.0.2 - Input_MenuStates\Engine\Lua5\Lib;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>$(DXSDK_DIR)Utilities\bin\x86;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>$(DXSDK_DIR)Include;C:\Users\Si\Desktop\Lundum Dare 2\Engine\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;d3d10.lib;d3dx10d.lib;irrKlang.lib;d3dx9d.lib;dxerr.lib;dxguid.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d10.lib;d3dx10.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="dxFPSCamera.cpp" />
+    <ClCompile Include="dxFontManager.cpp" />
+    <ClCompile Include="dxGhostCamera.cpp" />
+    <ClCompile Include="dxOrbitCamera.cpp" />
+    <ClCompile Include="dxShaderLoader.cpp" />
+    <ClCompile Include="dxSpriteManager.cpp" />
+    <ClCompile Include="dxTextureLoader.cpp" />
+    <ClCompile Include="Iactor.cpp" />
+    <ClCompile Include="IclassBaseManager.cpp" />
+    <ClCompile Include="IclassManagerUpdater.cpp" />
+    <ClCompile Include="Ientity.cpp" />
+    <ClCompile Include="Isprite.cpp" />
+    <ClCompile Include="IupdateActor.cpp" />
+    <ClCompile Include="IupdateEntity.cpp" />
+    <ClCompile Include="IupdateSprite.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="classLoader.h" />
+    <ClInclude Include="DEADBEEF_CORE.h" />
+    <ClInclude Include="DEADBEEF_ENGINE.h" />
+    <ClInclude Include="DEADBEEF_GEOMETRY.h" />
+    <ClInclude Include="dxBaseModel.h" />
+    <ClInclude Include="dxActor.h" />
+    <ClInclude Include="dxBaseSprite.h" />
+    <ClInclude Include="dxCollision.h" />
+    <ClInclude Include="dxFPSCamera.h" />
+    <ClInclude Include="dxCameraManager.h" />
+    <ClInclude Include="dxD3D.h" />
+    <ClInclude Include="dxFontManager.h" />
+    <ClInclude Include="dxGeometry.h" />
+    <ClInclude Include="dxGhostCamera.h" />
+    <ClInclude Include="dxInput.h" />
+    <ClInclude Include="dxLightManager.h" />
+    <ClInclude Include="dxOrbitCamera.h" />
+    <ClInclude Include="dxShaderLoader.h" />
+    <ClInclude Include="dxSprite.h" />
+    <ClInclude Include="dxSpriteManager.h" />
+    <ClInclude Include="dxSystem.h" />
+    <ClInclude Include="dxTextureLoader.h" />
+    <ClInclude Include="dxWindows.h" />
+    <ClInclude Include="DX_Mesh_Loader.h" />
+    <ClInclude Include="gameStateMan.h" />
+    <ClInclude Include="gameTimer.h" />
+    <ClInclude Include="Iactor.h" />
+    <ClInclude Include="Iclass.h" />
+    <ClInclude Include="IclassBaseManager.h" />
+    <ClInclude Include="IclassManagerUpdater.h" />
+    <ClInclude Include="Ientity.h" />
+    <ClInclude Include="Isprite.h" />
+    <ClInclude Include="IupdateActor.h" />
+    <ClInclude Include="IupdateEntity.h" />
+    <ClInclude Include="IupdateSprite.h" />
+    <ClInclude Include=".\input.h" />
+    <ClInclude Include="meshImporter.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="MEGASHADER.fx">
+      <FileType>Document</FileType>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(DXSDK_DIR)Utilities\bin\x86\"fxc.exe  /T fx_4_0 /Fo "%(Filename).fxo" "%(FullPath)"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(filename).fxo </Outputs>
+    </CustomBuild>
+    <None Include="..\..\..\..\Desktop\werwer.png" />
+    <None Include="bumpMap.fx" />
+    <None Include="DiffuseSpecular.fx" />
+    <None Include="E:\Simon\Programming\DX10 2\Engine 3.1.5 - Shadows + collision\Engine\texturing.fx" />
+    <None Include="fixedFunction.fx" />
+    <None Include="lighthelper.fx" />
+    <None Include="Textures\splash.png" />
+    <None Include="texturing.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\icon.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
