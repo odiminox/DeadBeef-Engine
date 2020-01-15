@@ -1,4 +1,11 @@
 # DeadBeef-Engine
-DirectX 10 3D Engine I wrote in University
+C++ DirectX 10 3D Engine I wrote before starting University in 2012.
 
-C++ DirectX 10 3D Engine I wrote during University in 2013.
+Features:
+1. State-based scene management
+2. 3D rendering with normal mapping and specular materials
+3. 2D objects and GUI
+4. Spotlight shadow and lighting
+5. Preset camera modes: orbit, ghost, FPS
+6. Some LUA bindings
+7. Dodgy C++ code
