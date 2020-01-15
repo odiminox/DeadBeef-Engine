@@ -1,14 +1,11 @@
 #ifndef DXSYSTEM
 #define DXSYSTEM
 
-//#include <tchar.h>
-//#include <D3dx9math.h>
-
+#include <tchar.h>
 #include <windows.h>
+#include <D3dx9math.h>
+
 #include "DEADBEEF_CORE.h"
-
-#include "cal3d\cal3d.h"
-
 
 /**************************************************************************************
 * dxSystem.h
@@ -29,143 +26,142 @@ class dxSystem: public DEADBEEF_CORE/*public luaManager*/
 private:
 	HINSTANCE hInst; // global handle to hold the application instance
 
+	int m_iWidth;
+	int m_iHeight;
+
+	float testX;
+	float testY;
+	float testZ;
+	float test1;
+	float test2;
+	float test3;
+
+	float x;
+	float y;
+	float z;
+
+	float fogStart;
+	float fogEnd;
+
+	float gunOffset;
+
+	float value;
+
 public:
 	dxSystem();
 	~dxSystem();
 
-	float m_iWidth;
-	float m_iHeight;
+	dxlightManager testLight;
 
 	bool initialiseObjects();
 	void setup();
 	int run();
 
 	bool render();
-	bool update();
-
-	float x;
-	float y;
-	float z;
+	bool MenuRender();
+	void MenuInput();
 
 	void shutDown();
 };
 
 dxSystem::dxSystem():m_iWidth(800), m_iHeight(600)
 {
-
 }
 
 dxSystem::~dxSystem()
 {}
 
-
 bool dxSystem::initialiseObjects()
 {  //Object init code goes here
 	shaderLoader("MEGASHADER.fx", "RENDER_PL_BLINNPHONG");//For testing, will be made a proper shader loader in the future
 
+	createActors(2);
 	createSprites(1);
-	createActors(1);
-	createLights(1);
 
 	initialiseGraphics(800.0f, 600.0f);
 
 	initialiseMouse();
-	orthographicCamera();
 
-	initialiseSprite(0, "./Textures/Widget.png", 0.0f, 0, 0, 500.0f, 100.0f);
+	initialiseFPSCamera(70.0f, 25.0f, 3.5f);
 
-	initialiseActorData(0, "./Models/Orc2.obj", "./Textures/full_body_1_tex.png",  "./Textures/full_body_1_norm.png", "./Textures/full_body_1_Specular.png");
+	translateFPSCamera(testX, 0.0f, 0.0f);
+
+	initialiseActorData(0, "./Models/BelnderEXport.obj", "./Textures/full_body_1_tex.png",  "", "");
+	initialiseActorRotLoc(0,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -60.0f);
+	initialiseActorData(1, "./Models/blenderRoom.obj", "./Textures/level_textures/Main_room/main_room.png",  "", "");
+	initialiseActorRotLoc(1,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -60.0f);
 
 
-	initialiseActorRotLoc(0,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-
-
-
-	setLightAmbient(0,  1.0f, 1.0f, 1.0f, 1.0f);
+	createLights(1);
+	//Create Directional light
+ 	setLightAmbient(0,  1.0f, 1.0f, 1.0f, 1.0f);
 	setLightProperties(0, 0.2f, 0.8f, 0.3f, 15.0f);
-    setDirectionalLightPosCol(0, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f , 1.0f, 1.0f);
+    setDirectionalLightPosCol(0, 0.0f, -1.0f, -1.0f, 1.0f, 1.0f , 1.0f, 1.0f);
+
+	initialiseSprite(0, "./Textures/Directx 10.png", 0.0f, 50, 550, 100.0f, 100.0f);
 
 	loadAllSprites();
-
 	loadAllActors();
-
-	//enableLighting();
 
 	myState.StateSetUp(myState.iGameState);
 
+	initFont();
+
 	return true;
 }
 
+void dxSystem::MenuInput(){
+	return;
+}
+
+bool dxSystem::MenuRender(){
+	//Start scene up
+	beginScene();
+
+	drawActor(0, 0.0f, 5.0f, 0.0f,  100.0f, 0.0f, -200.0f);
 
 
+	rotateFPSCamera(pitch, yaw, roll);
+	renderFPSCamera();
+
+	//Apply game variables with temp variables
+	myState.iGameState = windowsManager::m_iInputState;
+
+	drawSprite(0, Windows->m_fRotTest, 200.0f, 200.0f, 0.0f, 0.0f);
+
+	renderAllActors();
+
+	enableDebugMode();
+
+	enableLight(0);
+
+	//end scene for rendering
+	endScene();
+	return true;
+}
 bool dxSystem::render()
 { //Obect rendering code goes between beginScene() and endScene()
 	beginScene();
-	
+
+	drawSprite(0, 0.0f, 100.0f, 100.0f, 50.0f, 550.0f);
+
+	drawActor(0, 0.0f, delta, 0.0f, 100.0f, 0.0f, 0.0f);
+
+	rotateFPSCamera(pitch, yaw, roll);
+	walkFPSCamera(8.0f, delta);
+	strafeFPSCamera(8.0f);
+	renderFPSCamera();
+
+	renderAllActors();
+	renderAllSprites();
+
+	enableDebugMode();
+
 	enableLight(0);
-
-	/*setLightAmbient(0,  1.0f, 1.0f, 1.0f, 1.0f);
-	setLightProperties(0, 0.2f, 0.8f, 0.3f, 15.0f);
-    setDirectionalLightPosCol(0, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f , 1.0f, 1.0f);*/
-
-	
 	//enableLight(1);
-	///////////////////////////////////////////////////////////////////////////////////////
-	drawSprite(0, 0.0f, 200.0f, 280.0f, 110.0f, 150.0f);
-	drawActor(0, 0.0f,0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-
-	renderOrbitCamera();
-
-	renderActorSpecific(0);
-	renderSpriteSpecific(0);
-
-	updateAllActors();
-	updateAllLights();
 
 	endScene();
 
-	return true;
-}
-
-bool dxSystem::update()
-{
-	 float fps = (float)m_iFrameCnt / myTimer.lastElapsedFrame;
-	 float mspf = 1000.0f / fps;
-
-	yaw    = Windows->m_inputYaw * 3.0f;
-	roll     = Windows->m_inputRoll * 3.0f;
-	pitch  = Windows->m_inputPitch * 3.0f;
-
-	translateOrbitCamera(x, y, z);
-	rotateOrbitCamera(yaw, roll, pitch);
-
-	if(keys[W])
-		y += 1.0f;
-	if(keys[S])
-		y -= 1.0f;
-	if(keys[A])
-		x += 1.0f;
-	if(keys[D])
-		x -= 1.0f;
-
-	delta = myTimer.lastElapsedFrame;
-
-	 std::ostringstream outs;
-	 outs.precision(5);
-	 outs
-		 << "\n\n\n\n\n\nFRAME STATS"
-		 << "\nanim rate: " << myTimer.anim_rate
-		 << "\nTime: " << myTimer.lastElapsedFrame
-		 << "\nframe Count: " << m_iFrameCnt
-		 << "\nmiliseconds per frame: " << mspf
-		 << "\nFPS: " << fps;
-	 m_sFrameStats = outs.str();
-
-	 m_iFrameCnt++;
-
-	 m_fDeltaTime = 100.0f / fps;
-
-	 //return m_fDeltaTime;
 	return true;
 }
 
@@ -206,27 +202,40 @@ int dxSystem::run()
 			//If the current frame count is below the current FPS then do nothing
 		} else
 		{
+
 			if (keys[ESCAPE])				// Was ESC Pressed?
 			{
 				done=TRUE;						// ESC Signalled A Quit
 			}
+
+// 			if(keys[])
+// 			{
+// 
+// 			}
+// 			if(keys[])
+// 			{
+// 
+// 			}
+			render();
 			//Run while main game is running.
-			if (myState.StateGameTest(myState.bTempRunning) != false){
-				//render();
+			//if (myState.StateGameTest(myState.bTempRunning) != false){
+			//	render();
 // 				//Check state -> Render.
- 				switch(myState.iGameState){
- 					case 0:
- 						render();
- 						break;
+// 				switch(myState.iGameState){
+// 					case 0:
+// 						MenuRender();
+// 						break;
+// 					case 1:
+// 						render();
 // 						///....Another render mode....
- 					default:
-						break;
- 						//;//no idea why this statement does not like having no ";" in default label
- 				}
-			}
+// 						break;
+// 					default:
+// 						;//no idea why this statement does not like having no ";" in default label
+// 				}
+			//}
 		}
-		update();
-		//updateScene();
+
+		updateScene();
 		// End Timer
 		QueryPerformanceCounter(&myTimer.timeEnd);
 	   // Current frame count
