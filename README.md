@@ -1,5 +1,5 @@
 # DeadBeef-Engine
-C++ DirectX 10 3D Engine I wrote before starting University in 2012.
+C++ DirectX 10 3D Engine I wrote before starting University in 2011.
 
 Features:
 1. State-based scene management
